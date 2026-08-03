@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Sara</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(135deg,#0d0d18,#180b22);
+
+    padding:10px;
+}
+
+.typing span{
+    animation: blink 1s infinite;
+}
+
+.typing span:nth-child(2){
+    animation-delay:.2s;
+}
+
+.typing span:nth-child(3){
+    animation-delay:.4s;
+}
+@keyframes blink{
+    0%,80%,100%{
+        opacity:.2;
+    }
+
+    40%{
+        opacity:1;
+    }
+    
+}
+
+.container{
+
+    width:min(100%,800px);
+    padding:clamp(12px,2vw,25px);
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:30px;
+
+    padding:15px;
+
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:15px;
+}
+
+.profile{
+
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.avatar{
+
+    width:clamp(45px,8vw,70px);
+    height:clamp(45px,8vw,70px);
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+.name{
+
+    color:white;
+    font-size:clamp(18px,2.5vw,24px);
+}
+
+.status{
+
+    color:#bbb;
+}
+
+.dot{
+
+    display:inline-block;
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:limegreen;
+}
+
+.menu{
+    position:absolute;
+    top:20px;
+    right:20px;
+    z-index: 1000;
+}
+
+.menu-btn{
+    background:none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.dropdown{
+    display:none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 180px;
+    background: #222;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px
+    rgba(0,0,0,.5);
+    z-index: 999;
+}
+
+.dropdown div{
+    padding: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.dropdown div:hover{
+    background:#444;
+}
+
+.hero{
+
+    width:100%;
+    aspect-ratio: 16/9;
+    height: auto;
+
+    object-fit:cover;
+
+    border-radius:25px;
+
+    margin-bottom:20px;
+}
+
+.chat-box{
+
+    height:40vh;
+    min-height: 220px;
+    max-height: 500px;
+
+    overflow-y:auto;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:15px;
+
+    padding-right:5px;
+}
+
+.msg{
+
+    max-width:75%;
+
+    padding:15px;
+
+    border-radius:20px;
+
+    color:white;
+
+    font-size:clamp(15px,2vw,18px);
+}
+
+.sara{
+
+    align-self:flex-start;
+
+    background:rgba(255,255,255,.08);
+}
+
+.user{
+
+    align-self:flex-end;
+
+    background:#b65d7c;
+}
+
+
+
+.input-area{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:20px;
+}
+
+input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    padding:18px;
+
+    border-radius:40px;
+
+    background:rgba(255,255,255,.07);
+
+    color:white;
+
+    font-size:clamp(15px,2vw,18px);
+}
+
+button{
+
+    border:none;
+
+    width:clamp(48px,10vw,60px);
+    height:clamp(48px,10vw,60px);
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:25px;
+
+    background:#d76a94;
+
+    color:white;
+}
+
+.quick{
+
+    display:flex;
+
+    overflow-x:auto;
+
+    gap:10px;
+
+    margin-top:15px;
+}
+
+.quick button{
+
+    width:auto;
+    height:auto;
+
+    padding:12px 18px;
+
+    border-radius:25px;
+
+    background:rgba(215,106,148,.15);
+
+    color:#ff8db2;
+}
+
+@media(max-width:700px){
+    body{
+        padding: 8px;
+    }
+
+    .container{
+        border-radius: 20px;
+        padding: 12px;
+    }
+
+    .header{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .profile{
+        width: 100%;
+    }
+
+    .hero{
+        gap: 8px;
+    }
+
+
+    .msg{
+        max-width:95%;
+    }
+
+    .input-area{
+        gap: 8px;
+    }
+
+    .quick{
+        padding-bottom: 5px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<div class="profile">
+
+<img src="file_00000000292c7207bce40751a1221536.png" class="avatar">
+
+<div>
+
+<div class="name">Sara ❤️</div>
+<div class="status">online <span class="dot"></span>
+</div>
+
+</div>
+<div class="menu">
+    <button class="menu-btn" onclick="toggleMenu()">⁞</button>
+    <div class="dropdown" id="dropdown">
+        <div onclick="openGallery()">Gallery</div>
+        <div onclick="clearChat()">Clear Chat</div>
+        <div onclick="aboutSara()">About Sara v1.0</div>
+    </div>
+</div>
+</div>
+
+</div>
+
+
+<img src="IMG_20260701_120032.png" class="hero">
+
+<div class="chat-box" id="chat">
+
+<div class="msg sara">
+Heyy, how's it going? ☕
+</div>
+
+</div>
+
+<div class="input-area">
+
+<input
+id="message"
+placeholder="Message Sara...">
+
+<button onclick="sendMessage()">
+➤
+</button>
+
+</div>
+
+<div class="quick">
+
+<button onclick="quick('motivate me')">
+💪 motivate
+</button>
+
+<button onclick="quick('study tips')">
+📚 study
+</button>
+
+<button onclick="quick('self care')">
+💖 self care
+</button>
+
+<button onclick="quick('random advice')">
+✨ advice
+</button>
+
+</div>
+
+</div>
+
+<script>
+const phrases=["sorry","my","forgive","me","mistake","typo","bad"];
+const greetings=["hi","hello","hey","namaste","konnichiwa","yo"];
+const self=["self","care","better","health"];
+const emotion=["mood","feeling","how","are","you"];
+const mhq=["depressed","depression","sad","unhappy","down"];
+function containsKeyword(words,array)
+{
+    for(let word of words){
+        if(array.includes(word)){
+            return true;
+        }
+    }
+    return false;
+}
+
+function showTyping(){
+    let chat=document.getElementById("chat");
+    let typing=document.createElement("div");
+
+    typing.className="msg sara";
+    typing.id="typing";
+    typing.innerHTML="Sara is typing...";
+    chat.appendChild(typing);
+    chat.scrollTop=chat.scrollHeight;
+
+}
+function hideTyping(){
+    let typing=document.getElementById("typing");
+
+    if(typing){
+        typing.remove();
+    }
+ }
+
+function toggleMenu(){
+    let
+    menu=document.getElementById("dropdown");
+
+    if(menu.style.display=="block")
+    menu.style.display="none";
+else
+menu.style.display="block";
+}
+
+
+
+function isWikiQuestion(text){
+    let q=text.toLowerCase().trim();
+    return q.startsWith("who ") ||
+           q.startsWith("what ") ||
+           q.startsWith("when ") ||
+           q.startsWith("where ") ||
+           q.startsWith("why ") ||
+           q.startsWith("how ") ||
+           q.startsWith("tell me about") ||
+           q.startsWith("explain");
+}
+
+async function searchWikipedia(query) {
+
+    try{
+
+        let clean=query.toLowerCase();
+        clean=clean.replace(/^who\s+(invented|created|made)\s+/i,"");
+        clean=clean.replace(/^who\s+is\s+/i,"");
+        clean=clean.replace(/^who\s+was\s+/i,"");
+        clean=clean.replace(/^what\s+is\s+/i,"");
+        clean=clean.replace(/^what\s+was\s+/i,"");
+        clean=clean.replace(/^tell me about\s+/i,"");
+        clean=clean.replace(/^explain\s+/i,"");
+        clean=clean.replace(/^how to\s+/i,"");
+        clean=clean.replace(/\?/g,"");
+
+        clean=clean.replace(/^who is\s+/i,"");
+        clean=clean.replace(/^who was\s+/i,"");
+        clean=clean.replace(/^what is\s+/i,"");
+        clean=clean.replace(/^what was\s+/i,"");
+        clean=clean.replace(/^tell me about\s+/i,"");
+        clean=clean.replace(/^explain\s+/i,"");
+
+        let searchURL=`https://en.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(clean)}&limit=1&format=json&origin=*`;
+
+        let searchRes=await fetch(searchURL);
+        let searchData=await searchRes.json();
+
+        if(!searchData[1] || searchData[1].length===0){
+            return null;
+        }
+
+        let title=searchData[1][0];
+
+        let summaryRes=await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
+
+        let summaryData=await summaryRes.json();
+
+        if(summaryData.extract){
+            return {
+                title: summaryData.title,
+                text: summaryData.extract,
+                image: summaryData.thumbnail ? summaryData.thumbnail.source : null,
+                url: summaryData.content_urls?.desktop?.page
+            };
+        }
+
+        return null;
+
+    }catch(err){
+        return null;
+    }
+
+}
+
+async function sendMessage(){
+
+    let input=document.getElementById("message");
+    let text=input.value.trim();
+
+    if(text==="") return;
+
+    addMessage(text,"user");
+    input.value="";
+
+    let replies=getReply(text);
+
+    if(
+        isWikiQuestion(text) ||
+        (replies.length===1 &&
+        replies[0]==="Interesting... tell me more ☕")
+    ){
+
+        showTyping();
+
+        let wikiAnswer=await searchWikipedia(text);
+
+        hideTyping();
+
+        if(wikiAnswer){
+
+            let shortAnswer=
+            wikiAnswer.text.split(". ").slice(0,3).join(". ");
+
+            replies=[
+                "📖 " + wikiAnswer.title + "\n\n" + shortAnswer
+            ];
+
+            if(wikiAnswer.image){
+                addImageMessage(wikiAnswer.image);
+            }
+        }
+    }
+
+    let delay=0;
+
+    for(let reply of replies){
+
+        setTimeout(function(){
+
+            showTyping();
+
+            setTimeout(function(){
+
+                hideTyping();
+                addMessage(reply,"sara");
+
+            },1500);
+
+        },delay);
+
+        delay+=3000;
+    }
+}
+
+function addImageMessage(url){
+
+let chat=document.getElementById("chat");
+
+let div=document.createElement("div");
+
+div.className="msg sara";
+
+div.innerHTML=`<img src="${url}" style="width:100%;border-radius:15px;display:block;">`;
+
+chat.appendChild(div);
+
+chat.scrollTop=chat.scrollHeight;
+}
+
+function addMessage(text,type){
+
+let chat=document.getElementById("chat");
+
+let div=document.createElement("div");
+
+div.className="msg "+type;
+
+div.innerText=text;
+
+chat.appendChild(div);
+
+chat.scrollTop=chat.scrollHeight;
+}
+
+let waitmhqcateg=false;
+let waitconsentmhq=false;/*||*/
+
+
+function getReply(msg){
+
+let words=msg.toLowerCase().replace(/[^\w\s]/g," ").split(" ");
+let replies=[];
+if(waitconsentmhq){
+    waitconsentmhq=false;
+    if(words.includes("yes")){
+        replies.push("Thank you for trusting me.");
+        replies.push("Can you tell me what happened ?");
+        waitmhqcateg=true;
+    }
+
+    else if(words.includes("no")){
+        replies.push("That's okay..I'll be here whenever you want to talk.❤");
+    }
+    return replies;
+}
+if(waitmhqcateg){
+   
+    if(words.includes("1")||words.includes("family")){
+         waitmhqcateg=false;
+        replies.push("Hey,come here for a sec.❤","I'm really sorry things have been so hard at home.","Family is supposed to be a place where we feel safe,so when things aren't okay there... it hurts in a way that's hard to explain.You don't have to pretend you're fine with me.","One thing that i have learnt is that people won't change.No matter how much we wish them to understand us or act differently,their choice is ultimately theirs.","So for today,don't put your energy trying to fix everyone else.Put a little of it into you.","🎵Listen to your favourite music.","☕Make yourself a cup of tea or grab a snack.","🍀Take a few deep breaths and remember that this is just another day...you've dealt with this before too...","🎮Play a game,read a book,draw,watch your favourite show-anything that gives your mind a rest for a while.","Just take care of yourself,you are important too ❤...");
+    }
+
+    else if(words.includes("2")||words.includes("friends")||words.includes("friend")){
+        waitmhqcateg=false;
+        replies.push("Hey... friendships can be complicated too. ","I'm really sorry you're feeling this way.","Sometimes a friend says something that hurts us without realizing it. Other times, they're having a bad day themselves and it comes out the wrong way. If they're usually kind to you, maybe give them a little time and ask them about it before assuming they meant to hurt you.","But... if someone is always rude, constantly puts you down, acts like they're better than everyone else, or only talks to you when they need something... that's not the kind of friendship you deserve.","A real friend won't make you feel small just to make themselves feel important.","And if you're feeling guilty because you couldn't help a friend when they needed you... please don't be too hard on yourself. You can't always fix someone else's problems, and that doesn't make you a bad friend. Sometimes just listening, checking in, or saying..I'm here for you.. means more than having the perfect solution.","If this is about classmates, remember that not everyone you study with has to become a close friend. It's okay to be polite, work together, and still keep your distance from people who drain your energy.","So here's today's tiny mission.😊","💬 If there was a misunderstanding with a good friend, try talking to them calmly when you're both feeling better.","🎵 Listen to a song you love.","☕ Grab a snack or something to drink.","🌿 Give yourself permission to step away from people who make you feel worse instead of better.","The people who truly care about you won't expect you to be perfect. They'll appreciate your kindness, respect your feelings, and make an effort to understand you too.","And hey... you're allowed to outgrow friendships that no longer bring you peace.That doesn't make you a bad person—it just means you're taking care of yourself. ❤️");
+    }
+
+    else if(words.includes("3")||words.includes("bf")||words.includes("partner")||words.includes("gf")){
+        waitmhqcateg=false;
+        replies.push("Hey... relationships can be really confusing sometimes.Whether it's your boyfriend, girlfriend, or someone you care about, misunderstandings happen more often than we'd like.","If it's something like a little distance between you two, a lack of conversation, or you've both been busy lately... try not to jump to the worst conclusion right away.","Sometimes people are dealing with things they haven't found the words to explain yet.","If you feel comfortable, reach out to them. A calm and honest conversation can clear up things that overthinking never will. 💛But... if it's something more serious—like you're constantly feeling disrespected, ignored, manipulated, or like your feelings never matter—that isn't something you should just keep accepting.","A healthy relationship should make you feel valued, heard, and safe to be yourself.And don't forget... your partner is human too.","If they're going through a difficult time, sometimes the best gift you can give is a little patience, kindness, and emotional support. You don't have to solve all their problems—just letting them know you're there can mean a lot.","At the same time, don't forget about yourself. You deserve that same care in return.Relationships work best when both people support each other.So here's today's tiny mission.😊💌 If there's been a misunderstanding, try sending one honest message instead of assuming the worst.","🎵 Put on your favorite playlist.","☕ Eat something nice, stay hydrated, and give your mind a little break.❤️" ,"Try not to let one difficult moment convince you that everything is over. Give things a little time if they need it, but also pay attention to how you're being treated.Whatever happens, I hope you choose the option that protects your peace and your happiness. You deserve a relationship where you're loved, respected, and appreciated for who you are.");
+    }
+
+    else if(words.includes("4")||words.includes("life")){
+        waitmhqcateg=false; 
+        replies.push("ohk");
+    }
+    else
+    {
+        replies.push("I think there was a typo in your text🤔...");
+    }
+
+    return replies;
+}
+
+
+
+/*random or simple conversation*/
+if(containsKeyword(words,greetings))
+{replies.push("Well hello there 😏");}
+
+if(words.includes("how") && words.includes("are") && words.includes("you"))
+{replies.push("I'm good...just existing like you're 😀...");}
+
+if(words.includes("sorry")){
+    replies.push("It's okay not take your time 😄");
+}
+/*mental health and motivation*/
+if(words.includes("sad") ||
+   words.includes("down") ||
+   words.includes("depressed"))
+{replies.push("I'm sorry you're feeling this way. Drink water, rest a bit and talk to someone you trust 💖");}
+
+if(containsKeyword(words,mhq))
+{replies.push("I'm sorry you're feeling this way... Don't worry i'm here for you...❤");
+replies.push("Would you like to talk about it if your okay?(Yes/No)");
+waitconsentmhq=true;
+}
+
+
+if(words.includes("motivate"))
+{replies.push("Progress > Perfection. Just begin.");}
+
+
+/*study or exam tips*/
+if(words.includes("study"))
+{replies.push("Try the Pomodoro technique: 25 mins study + 5 mins break.");}
+
+if(words.includes("assignment")){
+replies.push("One assignment at a time. Future you will thank present you.");}
+
+
+/*Health and self care*/
+if(containsKeyword(words,self))
+{replies.push("Sleep, hydration and food are not optional 😤");}
+
+
+
+/*food*/
+if(words.includes("recepie") ||words.includes("food") && words.includes("tutorial") || words.includes("how to"))
+{replies.push("Sorry but i'm not a chef,I'm Sara...");}
+
+
+/*informations expert*/
+if(words.includes("about you") || words.includes("tell me something about yourself") || words.includes("what are you") || words.includes("who are you")|| words.includes("where are you from"))
+{replies.push("Hi.😊Im an AI chatbot made by master andrio.I'm currently in development phase so there is a limit to what i can do.😓But dont wory i can still provide assistance in studies,motivation and self care.Feel free to ask any questions related to any of these...");}
+
+if (replies.length == 0){
+replies.push("Interesting... tell me more ☕");}
+
+return replies;
+}
+
+function quick(text){
+
+document.getElementById("message").value=text;
+
+sendMessage();
+}
+
+document.getElementById("message")
+.addEventListener("keypress",function(e){
+
+if(e.key==="Enter")
+sendMessage();
+
+});
+</script>
+
+</body>
+</html>
