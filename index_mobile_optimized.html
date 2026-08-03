@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Sara Gallery</title>
+        <link rel="stylesheet" href="style-1.css">
+        <!--Goggle Font-->
+        <link href="https://fonts.goggleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"rel="stylesheet">
+
+        <!--Icons-->
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+<style>
+img{max-width:100%;height:auto;display:block}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:20px}
+.card img{width:100%;border-radius:12px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.hero,.bottom{padding:20px}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.nav-links{display:flex;gap:16px;flex-wrap:wrap}
+@media(max-width:768px){
+.gallery{grid-template-columns:repeat(2,1fr)}
+.nav-links{justify-content:center;width:100%}
+.chat-btn{width:100%}
+}
+@media(max-width:480px){
+.gallery{grid-template-columns:1fr}
+.hero h1{font-size:32px}
+body{overflow-x:hidden}
+}
+</style>
+</head>
+
+
+    <body>
+        <!--Navbar-->
+        <nav>
+            <div class="logo">
+                <i class="fa-solid fa-hear"></i>
+                <span>Sara <small>v1</small></span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="Sara_QuestionTrigger_FIXED.html">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a class="active" href="index(1).html">Gallery</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <button class="chat-btn">
+                <a href="Sara_QuestionTrigger_FIXED.html">
+                <i class="fa-solid fa-comment"></i>
+                Start Chatting
+                </a>
+            </button>
+        </nav>
+
+        <!--Hero-->
+        <section class="hero">
+            <h1>Sara's<span> Instagram Gallery</span></h1>
+            <p>
+                A glimpse into Sara's world- 
+                study moments, cozy vibes, random fun and everything in between.
+            </p>
+        </section>
+
+        <!--Filter buttons-->
+        <section class="filters">
+            <button class="filter active">
+                All Posts
+            </button>
+
+            <button class="filter">
+            Study 
+            </button>
+
+            <button class="filter">
+                Daily life 
+            </button>
+
+            <button class="filter">
+                Self Care 
+            </button>
+
+            <button class="filter">
+                Random Fun 
+            </button>
+
+        </section>
+
+        <!--Gallery-->
+        <section class="gallery">
+            <div class="card">
+                <img src="file_00000000292c7207bce40751a1221536.png">
+            </div>
+            <div class="card">
+                <img src="file_00000000ca507207ac8b0ba00215a88b.png">
+            </div>
+            <div class="card">
+                <img src="IMG_20260709_220636.png">
+            </div>
+            <div class="card">
+                <img src="IMG_20260709_220657.png">
+            </div>
+            <div class="card">
+                <img src="IMG_20260709_220717.png">
+            </div>
+            <div class="card">
+                <img src="IMG_20260709_220739.png">
+            </div>
+            <div class="card">
+                <img src="IMG_20260709_220800.png">
+            </div>
+            <div class="card">
+                <img src="file_00000000161872078cf2f0ee3e7679a8.png">
+            </div>
+    </section>
+
+    <!--Bottom Section-->
+    <section class="bottom">
+    <div class="left">
+        <div class="heart">
+            <i class="fa-solid fa-heart"></i>
+        </div>
+    <div>
+    <h2>Want to see more??</h2>
+    <p>Chat with Sara and discover more moments.</p>
+    </div>
+    </div>
+
+    <button class="chat-btn">
+        <a href="Sara_QuestionTrigger_FIXED.html">
+        <i class="fa-solid fa-comment"></i>
+        Start Chatting
+        </a>
+    </button>
+
+    </section>
+
+    <script src="script(1).js"></script>
+
+    </body>
+</html>
