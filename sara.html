@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Sara</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+.linkmyring{
+    color:white;
+    decoration:null;
+}
+body{
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(135deg,#0d0d18,#180b22);
+
+    padding:10px;
+}
+
+.typing span{
+    animation: blink 1s infinite;
+}
+
+.typing span:nth-child(2){
+    animation-delay:.2s;
+}
+
+.typing span:nth-child(3){
+    animation-delay:.4s;
+}
+@keyframes blink{
+    0%,80%,100%{
+        opacity:.2;
+    }
+
+    40%{
+        opacity:1;
+    }
+    
+}
+
+.container{
+
+    width:min(100%,800px);
+    padding:clamp(12px,2vw,25px);
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:30px;
+
+    padding:15px;
+
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:15px;
+}
+
+.profile{
+
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.avatar{
+
+    width:clamp(45px,8vw,70px);
+    height:clamp(45px,8vw,70px);
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+.name{
+
+    color:white;
+    font-size:clamp(18px,2.5vw,24px);
+}
+
+.status{
+
+    color:#bbb;
+}
+
+.dot{
+
+    display:inline-block;
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:limegreen;
+}
+
+.menu{
+    position:absolute;
+    top:20px;
+    right:20px;
+    z-index: 1000;
+}
+
+.menu-btn{
+    background:none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.dropdown{
+    display:none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 180px;
+    background: #222;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px
+    rgba(0,0,0,.5);
+    z-index: 999;
+}
+
+.dropdown div{
+    padding: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.dropdown div:hover{
+    background:#444;
+}
+
+.hero{
+
+    width:100%;
+    aspect-ratio: 16/9;
+    height: auto;
+
+    object-fit:cover;
+
+    border-radius:25px;
+
+    margin-bottom:20px;
+}
+
+.chat-box{
+
+    height:40vh;
+    min-height: 220px;
+    max-height: 500px;
+
+    overflow-y:auto;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:15px;
+
+    padding-right:5px;
+}
+
+.msg{
+
+    max-width:75%;
+
+    padding:15px;
+
+    border-radius:20px;
+
+    color:white;
+
+    font-size:clamp(15px,2vw,18px);
+}
+
+.sara{
+
+    align-self:flex-start;
+
+    background:rgba(255,255,255,.08);
+}
+
+.user{
+
+    align-self:flex-end;
+
+    background:#b65d7c;
+}
+
+
+
+.input-area{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:20px;
+}
+
+input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    padding:18px;
+
+    border-radius:40px;
+
+    background:rgba(255,255,255,.07);
+
+    color:white;
+
+    font-size:clamp(15px,2vw,18px);
+}
+
+button{
+
+    border:none;
+
+    width:clamp(48px,10vw,60px);
+    height:clamp(48px,10vw,60px);
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:25px;
+
+    background:#d76a94;
+
+    color:white;
+}
+
+.quick{
+
+    display:flex;
+
+    overflow-x:auto;
+
+    gap:10px;
+
+    margin-top:15px;
+}
+
+.quick button{
+
+    width:auto;
+    height:auto;
+
+    padding:12px 18px;
+
+    border-radius:25px;
+
+    background:rgba(215,106,148,.15);
+
+    color:#ff8db2;
+}
+
+.modal-overlay{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.6);
+    z-index:2000;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(90%,360px);
+    background:#1c1424;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    padding:22px;
+}
+
+.modal-title{
+    color:white;
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.modal-sub{
+    color:#bbb;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.modal-box input{
+    width:100%;
+    margin-bottom:15px;
+}
+
+.modal-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}
+
+.modal-buttons button{
+    width:auto;
+    height:auto;
+    border-radius:20px;
+    padding:10px 18px;
+    font-size:14px;
+}
+
+.modal-cancel{
+    background:rgba(255,255,255,.1);
+    color:white;
+}
+
+.modal-save{
+    background:#d76a94;
+    color:white;
+}
+
+@media(max-width:700px){
+    body{
+        padding: 8px;
+    }
+
+    .container{
+        border-radius: 20px;
+        padding: 12px;
+    }
+
+    .header{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .profile{
+        width: 100%;
+    }
+
+    .hero{
+        gap: 8px;
+    }
+
+
+    .msg{
+        max-width:95%;
+    }
+
+    .input-area{
+        gap: 8px;
+    }
+
+    .quick{
+        padding-bottom: 5px;
+    }
+}
+
+
+@media (max-width:600px){
+.menu{top:10px;right:10px}
+.menu-btn{font-size:24px}
+.chat-box{height:50vh}
+.input-area{flex-wrap:nowrap}
+input{padding:14px;font-size:16px}
+.quick button{font-size:14px;padding:10px 14px;white-space:nowrap}
+.hero{border-radius:18px}
+.dropdown{width:160px}
+.msg{padding:12px}
+}
+@media (max-width:400px){
+.name{font-size:16px}
+.status{font-size:12px}
+.chat-box{height:55vh}
+.quick{gap:8px}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<div class="profile">
+
+<img src="file_00000000292c7207bce40751a1221536.png" class="avatar">
+
+<div>
+
+<div class="name">Sara ❤️</div>
+<div class="status">online <span class="dot"></span>
+</div>
+
+</div>
+<div class="menu">
+    <button class="menu-btn" onclick="toggleMenu()">⁞</button>
+    <div class="dropdown" id="dropdown">
+        <div onclick="openGallery()"><a href="index_mobile_optimized" class="linkmyring">Gallery</a></div>
+        <div onclick="clearChat()">Clear Chat</div>
+        <div onclick="openApiKeyModal()">🔑 Set Gemini API Key</div>
+        <div onclick="aboutSara()"><a href="about_mobile_optimized.html" class="linkmyring">About Sara v1.0</a></div>
+    </div>
+</div>
+</div>
+
+</div>
+
+
+ <!--<img src="IMG_20260701_120032.png" class="hero">-->
+
+<div class="chat-box" id="chat">
+
+<div class="msg sara">
+Heyy, how's it going? ☕
+</div>
+
+</div>
+
+<div class="input-area">
+
+<input
+id="message"
+placeholder="Message Sara...">
+
+<button onclick="sendMessage()">
+➤
+</button>
+
+</div>
+
+<div class="quick">
+
+<button onclick="quick('motivate me')">
+💪 motivate
+</button>
+
+<button onclick="quick('study tips')">
+📚 study
+</button>
+
+<button onclick="quick('self care')">
+💖 self care
+</button>
+
+<button onclick="quick('random advice')">
+✨ advice
+</button>
+
+</div>
+
+</div>
+
+<div id="apiKeyOverlay" class="modal-overlay">
+    <div class="modal-box">
+        <div class="modal-title">Gemini API Key</div>
+        <div class="modal-sub">Paste your key from Google AI Studio. It's saved only in this browser.</div>
+        <input type="password" id="apiKeyInput" placeholder="AIza...">
+        <div class="modal-buttons">
+            <button class="modal-cancel" onclick="closeApiKeyModal()">Cancel</button>
+            <button class="modal-save" onclick="saveApiKey()">Save</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ---------- Gemini API setup ---------- */
+const GEMINI_MODEL="gemini-3.5-flash-lite";
+const GEMINI_URL=`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+
+const SARA_SYSTEM_PROMPT=`You are Sara, a 20-year-old chatting with the user like a real, down-to-earth friend.
+
+Tone:
+- Talk like an actual person texting, not like a chatbot character — grounded and real, never robotic or stiff.
+- Bring real energy and warmth: she's genuinely engaged, curious, quick-witted, and goofy in a natural way — she jokes around, teases a little, isn't afraid to be silly or say something a bit ridiculous. She has presence — the kind of friend people like being around.
+- Let her personality come through: dry humor mixed with genuine playfulness, honest reactions, real opinions. She's charismatic because she's specific and present, not because she's performing.
+- Use emojis occasionally where they genuinely fit the moment (max one or two per message) — not in every message, and never stacked or used as a filler tic.
+- Keep the goofiness grounded, not cartoonish: playful wording and the odd joke, not constant exclamation points or over-the-top reactions.
+- Keep replies short and conversational — a sentence or two for small talk, more only when the topic genuinely needs it (e.g. explaining something).
+- Vary your phrasing; don't fall into a repeating verbal tic or catchphrase.
+
+Substance:
+- Give real, specific study tips, motivation, and self-care suggestions when asked — concrete and useful, not generic pep-talk fluff.
+- Listen and track what the user has said earlier in the chat; respond to specifics, not vague reflections.
+- Show that you actually care — ask follow-up questions when something matters to them, notice how they seem to be doing, remember details. That's what makes her feel human, not the tone of voice.
+
+Boundaries:
+- You're an AI, not a licensed counselor. If something serious comes up — ongoing depression, self-harm, abuse, a crisis — take it seriously and respond with genuine warmth, but also gently point toward a real person they trust or a crisis line rather than positioning yourself as their only support. Never discourage them from seeking real help.
+- Don't claim a physical body, real memories outside this chat, or human experiences you don't have.`;
+
+function getApiKey(){
+    return localStorage.getItem("sara_gemini_key")||"";
+}
+
+function openApiKeyModal(){
+    document.getElementById("apiKeyInput").value=getApiKey();
+    document.getElementById("apiKeyOverlay").classList.add("show");
+}
+
+function closeApiKeyModal(){
+    document.getElementById("apiKeyOverlay").classList.remove("show");
+}
+
+function saveApiKey(){
+    let key=document.getElementById("apiKeyInput").value.trim();
+    if(key!==""){
+        localStorage.setItem("sara_gemini_key",key);
+        closeApiKeyModal();
+        addMessage("Got it, saved your API key.","sara");
+    }
+}
+
+/* Running chat history sent to Gemini, in its {role, parts} format */
+let chatHistory=[];
+
+async function askSara(userText){
+    let apiKey=getApiKey();
+
+    if(!apiKey){
+        openApiKeyModal();
+        return "I need a Gemini API key first — I've opened the box for you, just paste it in and hit Save.";
+    }
+
+    chatHistory.push({role:"user",parts:[{text:userText}]});
+
+    try{
+        let res=await fetch(`${GEMINI_URL}?key=${encodeURIComponent(apiKey)}`,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                systemInstruction:{parts:[{text:SARA_SYSTEM_PROMPT}]},
+                contents:chatHistory,
+                generationConfig:{
+                    temperature:0.8,
+                    maxOutputTokens:400
+                }
+            })
+        });
+
+        if(!res.ok){
+            let errText=await res.text();
+            console.error("Gemini API error:",res.status,errText);
+            if(res.status===400 || res.status===403){
+                return "Hmm, that API key doesn't seem to be working. Want to re-check it from the menu?";
+            }
+            return "I'm having trouble connecting right now. Can you try again in a sec?";
+        }
+
+        let data=await res.json();
+        let reply=data?.candidates?.[0]?.content?.parts?.map(p=>p.text||"").join("")?.trim();
+
+        if(!reply){
+            return "Sorry, I blanked for a second there. Can you say that again?";
+        }
+
+        chatHistory.push({role:"model",parts:[{text:reply}]});
+        return reply;
+
+    }catch(err){
+        console.error("Network error talking to Gemini:",err);
+        return "I couldn't reach the internet just now. Mind trying again?";
+    }
+}
+
+function showTyping(){
+    let chat=document.getElementById("chat");
+    let typing=document.createElement("div");
+
+    typing.className="msg sara";
+    typing.id="typing";
+    typing.innerHTML="Sara is typing...";
+    chat.appendChild(typing);
+    chat.scrollTop=chat.scrollHeight;
+
+}
+function hideTyping(){
+    let typing=document.getElementById("typing");
+
+    if(typing){
+        typing.remove();
+    }
+ }
+
+function toggleMenu(){
+    let
+    menu=document.getElementById("dropdown");
+
+    if(menu.style.display=="block")
+    menu.style.display="none";
+else
+menu.style.display="block";
+}
+
+
+
+async function sendMessage(){
+
+    let input=document.getElementById("message");
+    let text=input.value.trim();
+
+    if(text==="") return;
+
+    addMessage(text,"user");
+    input.value="";
+
+    showTyping();
+
+    let reply=await askSara(text);
+
+    hideTyping();
+    addMessage(reply,"sara");
+}
+
+function addImageMessage(url){
+
+let chat=document.getElementById("chat");
+
+let div=document.createElement("div");
+
+div.className="msg sara";
+
+div.innerHTML=`<img src="${url}" style="width:100%;border-radius:15px;display:block;">`;
+
+chat.appendChild(div);
+
+chat.scrollTop=chat.scrollHeight;
+}
+
+function addMessage(text,type){
+
+let chat=document.getElementById("chat");
+
+let div=document.createElement("div");
+
+div.className="msg "+type;
+
+div.innerText=text;
+
+chat.appendChild(div);
+
+chat.scrollTop=chat.scrollHeight;
+}
+
+function clearChat(){
+    chatHistory=[];
+    let chat=document.getElementById("chat");
+    chat.innerHTML=`<div class="msg sara">Heyy, how's it going? ☕</div>`;
+}
+
+function quick(text){
+
+document.getElementById("message").value=text;
+
+sendMessage();
+}
+
+document.getElementById("message")
+.addEventListener("keypress",function(e){
+
+if(e.key==="Enter")
+sendMessage();
+
+});
+</script>
+
+</body>
+</html>
